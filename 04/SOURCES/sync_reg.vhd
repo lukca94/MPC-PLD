@@ -18,13 +18,13 @@ signal sig_reg      : STD_LOGIC := '0';
 ----------------------------------------------------------------------------------
 BEGIN
 ----------------------------------------------------------------------------------
-    process (CLK) 
+    sync_reg : process (CLK) 
     BEGIN
         IF rising_edge(CLK) THEN
             sig_reg <= SIG_IN;
             SIG_OUT <= sig_reg;
         END IF;
-    END process;
+    END process sync_reg;
 
 ----------------------------------------------------------------------------------
 END ARCHITECTURE Behavioral;

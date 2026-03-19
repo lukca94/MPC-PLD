@@ -15,11 +15,44 @@ END ENTITY edge_detector;
 ----------------------------------------------------------------------------------
 ARCHITECTURE Behavioral OF edge_detector IS
 ----------------------------------------------------------------------------------
+signal btn_delayed      : STD_LOGIC := '0';
 
 
 ----------------------------------------------------------------------------------
 BEGIN
 ----------------------------------------------------------------------------------
+    delay_process : process (CLK)
+    BEGIN
+        IF rising_edge(CLK) THEN
+            btn_delayed <= SIG_IN;
+         END IF;
+    END process delay_process;
+    
+    detector : process (CLK) 
+    BEGIN
+        IF rising_edge(CLK) THEN
+            IF (SIG_IN = '1' and btn_delayed = '0') THEN
+                EDGE_POS <= '1';
+            ELSE 
+                EDGE_POS <= '0';
+            END IF;
+            
+            IF (SIG_IN = '0' and btn_delayed = '1') THEN
+                EDGE_NEG <= '1';
+            ELSE 
+                EDGE_NEG <= '0';
+            END IF;
+            
+            IF (SIG_IN /= btn_delayed) THEN
+                EDGE_ANY <= '1';
+            ELSE 
+                EDGE_ANY <= '0';
+            END IF;
+            
+        
+        END IF;
+    
+    END process detector;
 
 
 ----------------------------------------------------------------------------------

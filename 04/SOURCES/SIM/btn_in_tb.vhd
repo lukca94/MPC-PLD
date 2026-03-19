@@ -10,7 +10,7 @@ ARCHITECTURE Behavioral OF btn_in_tb IS
 
   COMPONENT btn_in
   GENERIC(
-    G_DEB_PERIOD                : POSITIVE := 3
+    G_DEB_PERIOD                : POSITIVE := 12
   );
   PORT(
     CLK                         : IN  STD_LOGIC;
@@ -80,7 +80,7 @@ BEGIN
 
   btn_in_i : btn_in
   GENERIC MAP(
-    G_DEB_PERIOD                => 6
+    G_DEB_PERIOD                => 12
   )
   PORT MAP(
     CLK                         => clk,
