@@ -39,7 +39,7 @@ entity uart_tx is
         CLK_EN      : IN STD_LOGIC;
         DATA_IN     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
         TX_BUSY     : OUT STD_LOGIC;
-        UART_TXD    : OUT STD_LOGIC := '0'
+        UART_TXD    : OUT STD_LOGIC := '1'
   );
 end uart_tx;
 
@@ -52,7 +52,7 @@ architecture Behavioral of uart_tx is
     signal count_reset      : STD_LOGIC := '1';
     signal count            : INTEGER := 0;
     signal transmit         : STD_LOGIC := '0';
-    signal bit_storage      : STD_LOGIC_VECTOR (9 downto 0);
+    signal bit_storage      : STD_LOGIC_VECTOR (9 downto 0) := (others => '0');
     
 begin
     uart_tx : process (CLK)
@@ -91,12 +91,12 @@ begin
                 transmit <= '0';
             when st_store =>  
                 busy <= '1';
-                bit_storage <= '0' & DATA_IN & '1';
+                bit_storage <= '1' & DATA_IN & '0';
             when st_wait =>
-                NULL;                
-            when st_send =>
                 count_reset <= '0';
-                transmit <= '1';
+                transmit <= '1';        
+            when st_send =>
+                NULL;
         end case; 
     end process fsm_actions;
     

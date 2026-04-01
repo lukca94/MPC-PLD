@@ -82,17 +82,16 @@ begin
     begin
 
         wait for clk_period * 5;
-        data_in  <= "01010101";
+        data_in  <= "01010011";
         tx_start <= '1';
         wait for clk_period;
         tx_start <= '0';
         
         wait until tx_busy = '0';
-        wait for 100 ns;
-
+        wait for 500 ns;
         
         
-        wait for clk_period * 5;
+        wait for clk_period * 10;
         simulation_finished <= TRUE;
         wait;
     end process;
