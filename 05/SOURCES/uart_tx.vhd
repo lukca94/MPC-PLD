@@ -66,18 +66,19 @@ begin
     begin
         case current_state is
             when st_idle =>  
-                if (TX_START = '1')         then next_state <= st_store;
+                if (TX_START = '1')                         then next_state <= st_store;
                 else next_state <= st_idle;
                 end if;
             when st_store =>  
                 next_state <= st_wait;
             when st_wait =>
-                if (CLK_EN = '1')           then next_state <= st_send;
+                if (CLK_EN = '1')                           then next_state <= st_send;
                 else next_state <= st_wait;
                 end if;
             when st_send =>
-                if (count_over = '1')      then next_state <= st_idle;
-                else next_state <= st_send;
+                if (count_over = '1')                       then next_state <= st_idle;
+                else
+                    next_state <= st_send;
                 end if;          
         end case; 
     end process fsm;
@@ -91,7 +92,6 @@ begin
                 transmit <= '0';
             when st_store =>  
                 busy <= '1';
-                bit_storage <= '1' & DATA_IN & '0';
             when st_wait =>
                 count_reset <= '0';
                 transmit <= '1';        
@@ -100,17 +100,27 @@ begin
         end case; 
     end process fsm_actions;
     
+    bit_storage_reg : process (CLK)
+    begin
+        if rising_edge(CLK) then
+            if current_state = st_store then
+                bit_storage <= '1' & DATA_IN & '0';
+            end if;
+        end if;
+    end process;
+    
     bit_counter : process (CLK)
     begin
         if rising_edge(CLK) then
             if (CLK_EN = '1') then
                 if (count_reset = '1') then
                     count <= 0;
+                    count_over <= '0';
                 elsif (count = 9) then
                     count_over <= '1';
-                    count <= 0;
                 else
                     count <= count + 1;
+                    count_over <= '0';
                 end if;
             end if;
         end if;
@@ -122,11 +132,14 @@ begin
             if (CLK_EN = '1') then
                 if (transmit = '1') then
                     UART_TXD <= bit_storage(count);
+                else 
+                    UART_TXD <= '1';
                 end if;
             end if;
         end if;
     end process transmitter;
     
+
     TX_BUSY <= busy;
 
 end Behavioral;
