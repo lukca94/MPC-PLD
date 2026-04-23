@@ -1,0 +1,65 @@
+{
+  "name": "rp_pld",
+  "type": "PLATFORM",
+  "configuration": {
+    "description": "",
+    "xsa": "C:/Temp/246892/MPC-PLD/10/SOURCES/HW_platform/rp_top.xsa",
+    "xsaPathInPlatform": "rp_pld/hw/rp_top.xsa",
+    "emulationXsa": "",
+    "emulationXsaPathInPlatform": "",
+    "isCustomFSBL": false,
+    "fsblPath": "",
+    "pmufwElf": "",
+    "flow": "EMBEDDED",
+    "processorsMap": {
+      "microblaze_I": "microblaze_riscv"
+    },
+    "supportedOS": [
+      "standalone",
+      "linux"
+    ],
+    "supportedFamily": "zynq",
+    "stdGenHookList": [
+      {
+        "key": "VITIS_SDT_REPO",
+        "value": ""
+      },
+      {
+        "key": "VITIS_SDT_BOARD_DTS",
+        "value": ""
+      },
+      {
+        "key": "VITIS_SDT_INCLUDE_DTS",
+        "value": ""
+      },
+      {
+        "key": "-dt_overlay",
+        "value": "0"
+      },
+      {
+        "key": "custom_dtsi",
+        "value": ""
+      }
+    ],
+    "componentType": "PLATFORM",
+    "domains": [
+      {
+        "name": "standalone_microblaze_I",
+        "displayName": "standalone_microblaze_I",
+        "processor": "microblaze_I",
+        "cpuType": "microblaze_riscv",
+        "cpuInstance": "microblaze_I",
+        "os": "standalone",
+        "appTemplate": "empty_application",
+        "isBootDomain": false,
+        "qemuData": "resources/standalone_microblaze_I/qemu",
+        "qemuArgsFile": "resources/standalone_microblaze_I/qemu/qemu_args.txt",
+        "pmcQemuArgsFile": "",
+        "isBSPGenReq": false
+      }
+    ],
+    "emptyToolchainConfiguration": []
+  },
+  "useSysrootToolchain": false,
+  "templateFlow": "VITIS"
+}
