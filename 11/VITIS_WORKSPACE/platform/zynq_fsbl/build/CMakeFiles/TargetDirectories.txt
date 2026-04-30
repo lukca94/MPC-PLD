@@ -1,0 +1,4 @@
+C:/Temp/246892/MPC-PLD/11/VITIS_WORKSPACE/platform/zynq_fsbl/build/CMakeFiles/fsbl.elf.dir
+C:/Temp/246892/MPC-PLD/11/VITIS_WORKSPACE/platform/zynq_fsbl/build/CMakeFiles/print_build_info.dir
+C:/Temp/246892/MPC-PLD/11/VITIS_WORKSPACE/platform/zynq_fsbl/build/CMakeFiles/edit_cache.dir
+C:/Temp/246892/MPC-PLD/11/VITIS_WORKSPACE/platform/zynq_fsbl/build/CMakeFiles/rebuild_cache.dir
